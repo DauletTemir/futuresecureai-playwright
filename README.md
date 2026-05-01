@@ -44,4 +44,4 @@ npm run codegen
 - `docs/site-structure.md`
 - `docs/locators.md`
 - `docs/ci-cd-options.md`
-- `docs/playwright-trends-2025.md`
+- `docs/playwright-trends-2026.md`
