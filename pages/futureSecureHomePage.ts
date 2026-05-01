@@ -70,7 +70,8 @@ export class FutureSecureHomePage {
   }
 
   async goto() {
-    await this.page.goto('/');
+    const response = await this.page.goto('/');
+    await expect(response?.ok()).toBeTruthy();
     await this.dismissCookieBannerIfPresent();
   }
 
@@ -85,5 +86,27 @@ export class FutureSecureHomePage {
       await this.cookieAcceptButton.click();
       await expect(this.cookieDialog).not.toBeVisible({ timeout: 8_000 });
     }
+  }
+
+  async acceptCookies() {
+    await this.dismissCookieBannerIfPresent();
+  }
+
+  async verifyMainSections() {
+    await expect(this.whereWePlayHeading).toBeVisible();
+    await expect(this.partnerSectionHeading).toBeVisible();
+    await expect(this.careersHeading).toBeVisible();
+  }
+
+  async verifyFooterLinks() {
+    await expect(this.joinUsLink).toBeVisible();
+    await expect(this.privacyPolicyLink).toBeVisible();
+    await expect(this.footerLogo).toBeVisible();
+  }
+
+  async fillContactForm(name: string, email: string, message: string) {
+    await this.nameField.fill(name);
+    await this.emailField.fill(email);
+    await this.messageField.fill(message);
   }
 }
