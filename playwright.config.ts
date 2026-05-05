@@ -12,7 +12,7 @@ export default defineConfig({
   expect: {
     timeout: 10_000,
   },
-  reporter: [['html', { open: 'never' }], ['list']],
+  reporter: [['allure-playwright'], ['html', { open: 'never' }], ['list']],
   outputDir: 'test-results/artifacts',
   use: {
     baseURL,

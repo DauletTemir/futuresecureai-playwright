@@ -13,7 +13,7 @@ on:
 jobs:
   smoke-chromium:
     name: Smoke | Chromium
-    if: false          # ← добавить эту строку — job не запустится
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,10 +42,19 @@ jobs:
           path: |
             playwright-report
             test-results
+            allure-results
+
+      - name: Notify Slack on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: |
+            {"text": "❌ Smoke tests FAILED on `${{ github.ref_name }}`"}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   nightly-cross-browser:
     name: Nightly | Cross Browser
-    if: false          # ← добавить эту строку — job не запустится
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     strategy:
@@ -79,3 +88,13 @@ jobs:
           path: |
             playwright-report
             test-results
+            allure-results
+
+      - name: Notify Slack on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: |
+            {"text": "❌ Nightly `${{ matrix.project }}` tests FAILED on `${{ github.ref_name }}`"}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

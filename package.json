@@ -11,6 +11,8 @@
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "report": "playwright show-report",
+    "report:allure": "allure serve allure-results",
+    "report:allure:generate": "allure generate allure-results --clean",
     "codegen": "playwright codegen https://www.futuresecure.ai/",
     "list": "playwright test --list"
   },
@@ -20,6 +22,8 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "@types/node": "^25.6.0"
+    "@types/node": "^25.6.0",
+    "allure-commandline": "^2.38.1",
+    "allure-playwright": "^3.7.2"
   }
 }
