@@ -71,7 +71,9 @@ export class FutureSecureHomePage {
 
   async goto() {
     const response = await this.page.goto('/');
-    await expect(response?.ok()).toBeTruthy();
+    if (response && !response.ok()) {
+      throw new Error(`Page load failed: ${response.status()} ${response.statusText()}`);
+    }
     await this.dismissCookieBannerIfPresent();
   }
 
@@ -86,10 +88,6 @@ export class FutureSecureHomePage {
       await this.cookieAcceptButton.click();
       await expect(this.cookieDialog).not.toBeVisible({ timeout: 8_000 });
     }
-  }
-
-  async acceptCookies() {
-    await this.dismissCookieBannerIfPresent();
   }
 
   async verifyMainSections() {

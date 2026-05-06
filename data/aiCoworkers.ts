@@ -13,3 +13,5 @@ export const aiCoworkerNames = [
   'Sunny AI',
   'Jack AI',
 ] as const;
+
+export type AiCoworkerName = (typeof aiCoworkerNames)[number];
