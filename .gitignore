@@ -3,6 +3,8 @@
 node_modules/
 /test-results/
 /playwright-report/
+/playwright-docs/
+/playwright-docs
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
@@ -27,9 +29,14 @@ pnpm-debug.log*
 coverage/
 .nyc_output/
 
+# Claude Code
+.mcp.json
+.claude/
+
 # Editor files
 .idea/
 .vscode/
 
 # OS files
 .DS_Store
+**/.DS_Store
